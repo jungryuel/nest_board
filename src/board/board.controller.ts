@@ -6,12 +6,11 @@ import {
   Param,
   Post,
   Put,
-  Req,
 } from '@nestjs/common';
 import { BoardRequestDto } from './dto/boardRequestDto';
 import { BoardService } from './board.service';
 import { BoardResponseDto } from './dto/boardResponseDto';
-import { Board } from './board.entity';
+
 import { BoardListDto } from './dto/boardListResponse';
 
 @Controller('/api/boards')

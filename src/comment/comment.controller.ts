@@ -11,7 +11,7 @@ import { CommentService } from './comment.service';
 import { CommentRequestDto } from './dto/commentRequest';
 import { Comment } from './comment.entity';
 
-@Controller('/api')
+@Controller('/api/boards')
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 

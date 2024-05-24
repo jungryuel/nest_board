@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { BoardRequestDto } from './dto/boardRequestDto';
 import { BoardResponseDto } from './dto/boardResponseDto';
 import { BoardListDto } from './dto/boardListResponse';
-import { NotFoundError } from 'rxjs';
+import { BoardUpdateRequestDto } from './dto/boardUpdateRequest';
 
 @Injectable()
 export class BoardService {
@@ -31,7 +31,10 @@ export class BoardService {
     return BoardResponseDto.fromEntity(board);
   }
 
-  async updateBoard(id: number, boardDto: BoardRequestDto): Promise<void> {
+  async updateBoard(
+    id: number,
+    boardDto: BoardUpdateRequestDto,
+  ): Promise<void> {
     const board = await this.boardRepository.findOne({
       where: { id },
     });
@@ -40,7 +43,6 @@ export class BoardService {
     }
     board.content = boardDto.board_content;
     board.title = boardDto.board_title;
-    board.author = boardDto.board_author;
 
     await this.boardRepository.save(board);
   }
@@ -56,9 +58,10 @@ export class BoardService {
     await this.boardRepository.delete(id);
   }
 
-  //게시글 목록 조회는 작성자 , 생성일, 제목까지만
+  //게시글 목록 조회는 작성자 ,수정일,생성일, 제목까지만
   async getAllBoards(): Promise<BoardListDto[]> {
     const boards = await this.boardRepository.find();
+
     return boards.map((board) => BoardListDto.fromEntity(board));
   }
 }
