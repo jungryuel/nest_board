@@ -1,15 +1,19 @@
 import { Board } from '../board.entity';
 
 export class BoardResponseDto {
-  title: string;
-  content: string;
-  createdAt: Date;
+  board_title: string;
+  board_content: string;
+  board_author: string;
+  board_createdAt: Date;
+  board_updatedAt: Date;
 
   static fromEntity(board: Board) {
     const boardDto = new BoardResponseDto();
-    boardDto.content = board.content;
-    boardDto.title = board.title;
-    boardDto.createdAt = board.created_at;
+    boardDto.board_title = board.title;
+    boardDto.board_author = board.author;
+    boardDto.board_createdAt = board.created_at;
+    boardDto.board_content = board.content;
+    boardDto.board_updatedAt = board.updated_at;
     return boardDto;
   }
 }

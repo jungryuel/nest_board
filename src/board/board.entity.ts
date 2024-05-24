@@ -5,6 +5,7 @@ import {
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 @Entity({ name: 'BOARD' })
@@ -18,6 +19,9 @@ export class Board {
   @Column({ type: 'varchar', name: 'content', length: 2000 })
   content: string;
 
+  @Column({ type: 'varchar', name: 'author', length: 2000 })
+  author: string;
+
   @CreateDateColumn({
     type: 'timestamp',
     precision: 6,
@@ -25,6 +29,9 @@ export class Board {
     default: () => 'CURRENT_TIMESTAMP(6)',
   })
   created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp', precision: 6, name: 'updated_at' })
+  updated_at: Date;
 
   @OneToMany(() => Comment, (comment) => comment.board)
   comments: Comment[];

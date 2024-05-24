@@ -15,8 +15,8 @@ import { Comment } from './comment.entity';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @Post('/:Board_id')
-  async writeBoard(
+  @Post('/:Board_id/comments')
+  async writeComment(
     @Param('Board_id') boardId: number,
     @Body() commentDto: CommentRequestDto,
   ): Promise<void> {
@@ -24,7 +24,7 @@ export class CommentController {
   }
 
   @Put('/:Board_id/comments/:comment_id')
-  async updateBoard(
+  async updateComment(
     @Param('Board_id') boardId: number,
     @Param('comment_id') commentId: number,
     @Body() boardDto: CommentRequestDto,
@@ -33,15 +33,15 @@ export class CommentController {
   }
 
   @Delete('/:Board_id/comments/:comment_id')
-  async deleteBoard(
+  async deleteComment(
     @Param('Board_id') boardId: number,
     @Param('comment_id') commentId: number,
   ): Promise<void> {
     await this.commentService.deleteComment(boardId, commentId);
   }
 
-  @Get('/:Board_id')
-  async getAllBoard(@Param('Board_id') boardId: number): Promise<Comment[]> {
+  @Get('/:Board_id/comments')
+  async getAllComments(@Param('Board_id') boardId: number): Promise<Comment[]> {
     return await this.commentService.getAllComments(boardId);
   }
 }

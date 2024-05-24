@@ -2,6 +2,7 @@ import { Comment } from '../comment.entity';
 
 export class CommentResponseDto {
   content: string;
+  author: string;
   createdAt: Date;
 
   static fromEntity(comment: Comment) {

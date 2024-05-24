@@ -12,6 +12,7 @@ import { BoardRequestDto } from './dto/boardRequestDto';
 import { BoardService } from './board.service';
 import { BoardResponseDto } from './dto/boardResponseDto';
 import { Board } from './board.entity';
+import { BoardListDto } from './dto/boardListResponse';
 
 @Controller('/api/boards')
 export class BoardController {
@@ -42,7 +43,7 @@ export class BoardController {
   }
 
   @Get()
-  async getAllBoard(): Promise<Board[]> {
+  async getAllBoard(): Promise<BoardListDto[]> {
     return await this.boardService.getAllBoards();
   }
 }

@@ -45,9 +45,12 @@ export class CommentService {
     const comment = await this.commentRepository.findOne({
       where: { id: commentId },
     });
+    if (!comment) {
+      throw new Error('Comment not found');
+    }
 
-    comment.content = commentDto.content;
-    comment.created_at = new Date();
+    comment.content = commentDto.comment_content;
+    comment.author = commentDto.comment_author;
 
     await this.commentRepository.save(comment);
   }
