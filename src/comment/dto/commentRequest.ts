@@ -7,8 +7,8 @@ export class CommentRequestDto {
 
   static toEntity(dto: CommentRequestDto, board: Board) {
     const comment = new Comment();
-    comment.content = dto.comment_content;
-    comment.author = dto.comment_author;
+    comment.comment_content = dto.comment_content;
+    comment.comment_author = dto.comment_author;
     comment.board = board;
     return comment;
   }

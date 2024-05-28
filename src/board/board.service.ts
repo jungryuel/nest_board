@@ -41,6 +41,7 @@ export class BoardService {
     if (!board) {
       throw new HttpException('Board not found', HttpStatus.NOT_FOUND);
     }
+    
     board.content = boardDto.board_content;
     board.title = boardDto.board_title;
 

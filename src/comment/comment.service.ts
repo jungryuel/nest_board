@@ -6,6 +6,7 @@ import { CommentRequestDto } from './dto/commentRequest';
 import { Board } from 'src/board/board.entity';
 import { CommentResponseDto } from './dto/commentResponse';
 import { BoardRepository } from 'src/board/board.repository';
+import { CommentUpdateRequestDto } from './dto/commentUpdateRequest';
 
 @Injectable()
 export class CommentService {
@@ -34,7 +35,7 @@ export class CommentService {
   async updateComment(
     boardId: number,
     commentId: number,
-    commentDto: CommentRequestDto,
+    commentDto: CommentUpdateRequestDto,
   ): Promise<void> {
     const board = await this.boardRepository.findOne({
       where: { id: boardId },
@@ -43,14 +44,13 @@ export class CommentService {
       throw new Error('Board not found');
     }
     const comment = await this.commentRepository.findOne({
-      where: { id: commentId },
+      where: { comment_id: commentId },
     });
     if (!comment) {
       throw new Error('Comment not found');
     }
 
-    comment.content = commentDto.comment_content;
-    comment.author = commentDto.comment_author;
+    comment.comment_content = commentDto.comment_content;
 
     await this.commentRepository.save(comment);
   }
@@ -79,7 +79,6 @@ export class CommentService {
         throw new Error('Board not found');
       }
     }
-
     return comments;
   }
 }
